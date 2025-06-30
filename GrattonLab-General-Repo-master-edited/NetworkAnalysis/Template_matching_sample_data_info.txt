@@ -1,0 +1,5 @@
+LS02    /home/amd3565/Lifespan_Datalists/lifespan_datalist_LS02.xlsx    /projects/b1081/Lifespan/Nifti/derivatives/postFCproc_CIFTI
+LS05    /home/amd3565/Lifespan_Datalists/lifespan_datalist_LS05.xlsx    /projects/b1081/Lifespan/Nifti/derivatives/postFCproc_CIFTI
+LS08    /home/amd3565/Lifespan_Datalists/lifespan_datalist_LS08.xlsx    /projects/b1081/Lifespan/Nifti/derivatives/postFCproc_CIFTI
+LS11    /home/amd3565/Lifespan_Datalists/lifespan_datalist_LS11.xlsx    /projects/b1081/Lifespan/Nifti/derivatives/postFCproc_CIFTI
+LS14    /home/amd3565/Lifespan_Datalists/lifespan_datalist_LS14.xlsx    /projects/b1081/Lifespan/Nifti/derivatives/postFCproc_CIFTI
