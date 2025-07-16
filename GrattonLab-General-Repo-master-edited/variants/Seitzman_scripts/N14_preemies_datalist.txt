@@ -1,0 +1,14 @@
+neo504f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo504f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo539f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo539f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+caf044f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-caf044f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+caf049f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-caf049f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+caf059f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-caf059f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo305f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo305f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo510f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo510f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+caf067f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-caf067f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo299f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo299f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo320f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo320f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo314f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo314f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo519f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo519f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo535f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo535f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii
+neo508f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo508f/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii

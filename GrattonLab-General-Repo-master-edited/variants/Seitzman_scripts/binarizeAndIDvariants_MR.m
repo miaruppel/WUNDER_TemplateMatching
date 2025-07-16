@@ -34,6 +34,9 @@ function binarizeAndIDvariants_MR(spatialCorrMap,outputdir)
 % "Where there's a will there's a kluge."
 % -BAS 10/11/2019
 
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/cifti-matlab-master');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/functions');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/fieldtrip-20240731');
 
 %%%%% CHANGE THIS PATH TO THE LOCATION WHERE YOU STORED THE NEIGHBORS %%%%%
 %%%%% NOTE: This neighbors file is specific to the 32k-fsLR surfaces. %%%%%
@@ -91,9 +94,13 @@ clear sorted
 binData = logical(corrData<cThresh);
 template.data = binData;
 
+% Extract just the filename (without extension)
+[~, fname, ~] = fileparts(spatialCorrMap); 
+% Get the first 7 characters = subject ID
+subject_id = fname(1:7);
 
 % Write out binary variants (no size threshold applied)
-ft_write_cifti_mod([outputdir '/binarySpatialCorrMap_thresh' num2str(variantThresh) '%.dtseries.nii'],template)
+ft_write_cifti_mod([outputdir '/' subject_id '_binarySpatialCorrMap_thresh' num2str(variantThresh) '%.dtseries.nii'],template)
 
 
 % Give each variant a unique ID.
@@ -164,9 +171,9 @@ for i=1:length(ids)
     netVars(logical(netVars==ids(i)))=i;
 end
 
-
 % Write out variants with uniqueIDs
 template.data=netVars;
-ft_write_cifti_mod([outputdir '/networkVariants_thresh' num2str(variantThresh) '%_sizeThresh' num2str(sThresh) '.dtseries.nii'],template)
+ft_write_cifti_mod([outputdir '/' subject_id '_networkVariants_thresh' num2str(variantThresh) '%_sizeThresh' num2str(sThresh) '.dtseries.nii'],template)
+
 
 end

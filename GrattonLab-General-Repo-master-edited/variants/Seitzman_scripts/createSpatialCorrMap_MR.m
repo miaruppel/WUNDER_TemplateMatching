@@ -24,9 +24,9 @@ function createSpatialCorrMap_MR(subDconnLoc,outputdir)
 % "Where there's a will there's a kluge."
 % -BAS 10/11/2019
 
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master/NetworkAnalysis/cifti-matlab-master');
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master/NetworkAnalysis/functions');
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master/NetworkAnalysis/fieldtrip-20240731');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/cifti-matlab-master');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/functions');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/fieldtrip-20240731');
 
 %%%%% CHANGE THIS PATH TO THE LOCATION WHERE YOU STORED THE TEMPLATE %%%%%
 %%%%% NOTE: This template will only work with the 32k-fsLR surfaces. %%%%%
