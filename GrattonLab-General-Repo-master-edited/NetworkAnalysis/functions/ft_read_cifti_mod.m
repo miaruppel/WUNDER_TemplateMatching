@@ -134,7 +134,7 @@ end
 ft_hastoolbox('gifti', 1);
 
 % convert the character data to an xmltree object
-save('debug_workspace1.mat')
+%save('debug_workspace1.mat')
 %xmldata = string(xmldata);
 tree = xmltree(xmldata);
 

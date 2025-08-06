@@ -1,5 +1,5 @@
-neo504f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo504f/ses-None/files/DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-neo504f_tmask.txt
-neo539f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo090f/ses-None/files/DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-neo090f_tmask.txt
+neo097f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo097f/ses-None/files/DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-neo097f_tmask.txt
+neo090f /data/smyser/smyser3/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo090f/ses-None/files/DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-neo090f_tmask.txt
 neo102f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo102f/ses-None/files/DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-neo102f_tmask.txt
 neo085f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo085f/ses-None/files/DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-neo085f_tmask.txt
 neo096f /data/smyser/smyser4/wunder/wunder_caf_III/recon_docker/docker_output/sub-neo096f/ses-None/files/DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-neo096f_tmask.txt

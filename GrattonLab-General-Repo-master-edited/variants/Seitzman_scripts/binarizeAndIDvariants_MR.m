@@ -1,4 +1,4 @@
-function binarizeAndIDvariants_MR(spatialCorrMap,outputdir)
+function binarizeAndIDvariants_MR(spatialCorrMap, snrMask, outputdir)
 %binarizeAndIDvariants(spatialCorrMap,[snrMask],[corrThresh],[sizeThresh],[outputdir])
 %
 % This function creates network variants from a spatial correlation map and

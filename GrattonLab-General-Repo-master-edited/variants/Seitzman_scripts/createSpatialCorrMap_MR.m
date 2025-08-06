@@ -47,7 +47,7 @@ end
 
 
 % Read in group-average matrix
-groupDconnLoc = '/data/wheelock/data1/datasets/WashU120/120_allsubs_corr.dconn.nii';
+groupDconnLoc = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/HCP_all384_avgCorrMat.dconn.nii';
 tempCifti = ft_read_cifti_mod(groupDconnLoc);
 cortexInds = 1:sum(tempCifti.brainstructure==1 | tempCifti.brainstructure==2);
 groupMat = single(FisherTransform(tempCifti.data(cortexInds,cortexInds)));
@@ -74,7 +74,7 @@ clear groupMat subMat
 
 % Get the first 7 characters = subject ID
 subject_id = fname(1:7);
-ft_write_cifti_mod([outputdir '/spatial_corr_maps/' subject_id '_spatialCorrMap.dtseries.nii'],template)
+ft_write_cifti_mod([outputdir '/spatial_corr_maps/N14_termcontrols_HCP/' subject_id '_spatialCorrMap_HCP.dtseries.nii'],template)
 
 end
 
