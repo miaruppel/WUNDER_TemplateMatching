@@ -18,7 +18,10 @@ variantsfile = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/Grat
 % is (#vertices) X (#networks) and contains unthresholded connectivity maps
 % per network. Should also contain 'IDs', a 1 X (#systems) vector of 
 % numeric IDs for each system.
-templatesfile = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/variants/Seitzman_scripts/networkTemplates.mat'; 
+% --- WASHU-120 template ---
+%templatesfile = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/variants/Seitzman_scripts/networkTemplates.mat'; 
+% --- HCP template ---
+templatesfile = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/HCP_CIFTI_templates/Templates_consensus.mat'; 
 
 
 %--------------------------------------------------------------------------

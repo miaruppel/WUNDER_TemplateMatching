@@ -45,7 +45,7 @@ function templateMatchingVariants_MR(paramsFile,outputdir)
 
 % templateLoc = '/your/path/here/';
 templateLoc = pwd;
-load([templateLoc '/Resources/networkTemplateNames.mat']);
+load([templateLoc '/Resources/networkTemplateNames_HCP.mat']);
 count = 0;
 for i=1:length(IDNames)
     if strcmp(IDNames{i},'skip')

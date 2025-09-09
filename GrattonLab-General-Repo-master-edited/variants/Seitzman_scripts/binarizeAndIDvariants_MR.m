@@ -173,7 +173,7 @@ end
 
 % Write out variants with uniqueIDs
 template.data=netVars;
-ft_write_cifti_mod([outputdir '/' subject_id '_networkVariants_thresh' num2str(variantThresh) '%_sizeThresh' num2str(sThresh) '.dtseries.nii'],template)
+ft_write_cifti_mod([outputdir '/' subject_id '_networkVariants_thresh' num2str(variantThresh) '%_sizeThresh' num2str(sThresh) '_HCP.dtseries.nii'],template)
 
 
 end

@@ -48,6 +48,7 @@ end
 
 % Read in group-average matrix
 groupDconnLoc = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/HCP_all384_avgCorrMat.dconn.nii';
+%groupDconnLoc = '/data/wheelock/data1/datasets/WashU120/120_allsubs_corr.dconn.nii';
 tempCifti = ft_read_cifti_mod(groupDconnLoc);
 cortexInds = 1:sum(tempCifti.brainstructure==1 | tempCifti.brainstructure==2);
 groupMat = single(FisherTransform(tempCifti.data(cortexInds,cortexInds)));
