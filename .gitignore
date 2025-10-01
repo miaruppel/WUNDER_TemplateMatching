@@ -1,6 +1,8 @@
 WashU120/
 HCP_CIFTI_templates/
 output/
+output_1415_data/
+output_910_data/
 net_variant_analysis/
 GrattonLab-General-Repo-master-edited/lab_specific/
 GrattonLab-General-Repo-master-edited/NetworkAnalysis/distance_matrices/

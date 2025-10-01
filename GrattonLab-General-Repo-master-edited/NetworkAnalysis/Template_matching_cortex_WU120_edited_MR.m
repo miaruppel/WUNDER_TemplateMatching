@@ -42,9 +42,9 @@ end
 
 %%%%%%%%%%%%%%%% add paths to Gratton Lab scripts %%%%%%%%%%%%%%%%
 % for some reason, still having to specicify these in the command window for this to work 
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master/NetworkAnalysis/cifti-matlab-master');
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master/NetworkAnalysis/functions');
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master/NetworkAnalysis/fieldtrip-20240731');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/cifti-matlab-master');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/functions');
+addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/fieldtrip-20240731');
 
 
 % set up/threshold network templates
@@ -90,7 +90,16 @@ for s=1:length(subjects)
             fprintf('Run #%d \n', r)
             conf_fstring1 = sprintf('%s/%s/sub-%s/ses-None/files/',QC.topDir,QC.confoundsFolder,QC.subjectID);
             all_fstring2 = sprintf('sub-%s_task-%s_run-%d',QC.subjectID,QC.condition,QC.runs(r));
-            cifti_fstring = sprintf('%s/docker_output/sub-%s/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii',cifti_dirs{s},QC.subjectID);
+            
+            % for 14/15 data
+            %cifti_fstring = sprintf('%s/docker_output/sub-%s/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii',cifti_dirs{s},QC.subjectID);
+            % for 9/10 data
+            if strcmp(QC.confoundsFolder, 'docker_output_BP_filter_and_cleaning_2020_05_17')
+                cifti_fstring = sprintf('%s/docker_output_BP_filter_and_cleaning_2020_05_17/sub-%s/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas.dtseries.nii',cifti_dirs{s},QC.subjectID);
+            else 
+                cifti_fstring = sprintf('%s/docker_output/sub-%s/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas.dtseries.nii',cifti_dirs{s},QC.subjectID);
+            end
+            
             %save('debug_workspace.mat')
             fprintf('%s \n', cifti_fstring)
             
@@ -105,10 +114,15 @@ for s=1:length(subjects)
             %mins = 20;
             %all_fstring3 = sprintf('sub-%s_tmask_%dmins',QC.subjectID,mins);
             %tmask_fname = [conf_fstring1 'DCANBOLDProc_v4.0.0/analyses_v2/motion/' all_fstring3 '.txt']; %assume this is in confounds folder
-
-            tmask_fname = [conf_fstring1 'DCANBOLDProc_v4.0.0/analyses_v2/motion/' all_fstring2 '-tmask_0.2' QC.FDtype '.txt']; %assume this is in confounds folder
-            boldmot_folder{s,r} = [conf_fstring1 'DCANBOLDProc_v4.0.0']; % in this case, just give path/start so I can load different versions
-
+            
+            % for 14/15 data
+            %tmask_fname = [conf_fstring1 'DCANBOLDProc_v4.0.0/analyses_v2/motion/' all_fstring2 '-tmask_0.2' QC.FDtype '.txt']; %assume this is in confounds folder
+            %boldmot_folder{s,r} = [conf_fstring1 'DCANBOLDProc_v4.0.0']; % in this case, just give path/start so I can load different versions
+            % for 9/10 data 
+            tmask_fname = [conf_fstring1 'DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-' QC.subjectID '_tmask.txt']; 
+            boldmot_folder{s,r} = [conf_fstring1 'DCANBOLDProc_v4.0.0']; 
+            
+            
             if ~exist(boldmot_folder{s,r})
                 error(['FD folder does not exist for: ' boldmot_folder{s,r}]);
             end
