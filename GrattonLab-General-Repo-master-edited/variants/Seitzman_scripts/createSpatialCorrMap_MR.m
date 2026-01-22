@@ -47,8 +47,8 @@ end
 
 
 % Read in group-average matrix
-groupDconnLoc = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/HCP_all384_avgCorrMat.dconn.nii';
-%groupDconnLoc = '/data/wheelock/data1/datasets/WashU120/120_allsubs_corr.dconn.nii';
+%groupDconnLoc = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/HCP_all384_avgCorrMat.dconn.nii';
+groupDconnLoc = '/data/wheelock/data1/datasets/WashU120/120_allsubs_corr.dconn.nii';
 tempCifti = ft_read_cifti_mod(groupDconnLoc);
 cortexInds = 1:sum(tempCifti.brainstructure==1 | tempCifti.brainstructure==2);
 groupMat = single(FisherTransform(tempCifti.data(cortexInds,cortexInds)));
@@ -70,12 +70,21 @@ clear groupMat subMat
 
 
 % Write out the spatial correlation map
+% 14/15 data
 % Extract just the filename (without extension)
-[~, fname, ~] = fileparts(subDconnLoc); 
-
+%[~, fname, ~] = fileparts(subDconnLoc); 
 % Get the first 7 characters = subject ID
-subject_id = fname(1:7);
-ft_write_cifti_mod([outputdir '/spatial_corr_maps/N14_termcontrols_HCP/' subject_id '_spatialCorrMap_HCP.dtseries.nii'],template)
+%subject_id = fname(1:7);
+%ft_write_cifti_mod([outputdir '/termcontrols/' subject_id '_spatialCorrMap.dtseries.nii'],template)
+
+% 9/10 data 
+% Split path into folders
+parts = strsplit(subDconnLoc, filesep);
+% Find the folder that starts with 'sub-'
+sub_idx = find(startsWith(parts, 'sub-'), 1);
+subject_id = parts{sub_idx};
+
+ft_write_cifti_mod([outputdir '/preemies/' subject_id '_spatialCorrMap.dtseries.nii'],template)
 
 end
 

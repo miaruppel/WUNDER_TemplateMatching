@@ -1,4 +1,4 @@
-function Template_matching_cortex_WU120_edited_MR(data_info, outDir, Template)
+function Template_matching_cortex_PHH_subs(data_info, outDir, FSUorHCPorWU)
 
 % 
 % Matches each vertex to a functional network by comparing the dice coeff.
@@ -17,7 +17,7 @@ function Template_matching_cortex_WU120_edited_MR(data_info, outDir, Template)
 %
 %   outDir: output destination for dtseries.nii map and Dice values .mat
 %
-%   HCPorWU: one of either 'FSU' or 'NU'; sets up institution-specific paths/parameters
+%   FSUorNUorWU: one of either 'FSU' or 'NU'; sets up institution-specific paths/parameters
 %                   WU component added 2024-08-28 (MR)
 %
 %   *** note: this script currently assumes runs labeled as 'rest' in the .xlsx
@@ -31,29 +31,29 @@ function Template_matching_cortex_WU120_edited_MR(data_info, outDir, Template)
 %       
 %   (2) a sub-{subject}_dice_to_templates.mat, which saves the dice coeff. of
 %       each vertex's thresholded seedmap to each template's seedmap.
+%
+%
+%
 
 [subjects, datafiles, cifti_dirs] = textread(data_info, '%s%s%s');
-if ~exist('Template', 'var')
-    error('Must specify which template to use as input to set up correct paths');
+if ~exist('FSUorHCPorWU', 'var')
+    error('Must specify ''FSU'' or ''HCP'' or ''WU''as input to set up correct paths');
 end
 
 %%%%%%%%%%%%%%%% add paths to Gratton Lab scripts %%%%%%%%%%%%%%%%
-% for some reason, still having to specify these in the command window for this to work 
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/cifti-matlab-master');
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/functions');
-addpath('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/GrattonLab-General-Repo-master-edited/NetworkAnalysis/fieldtrip-20240731');
+% for some reason, still having to specicify these in the command window for this to work 
+addpath('cifti-matlab-master');
+addpath('functions');
+addpath('fieldtrip-20240731');
 
 
 % set up/threshold network templates
-if strcmp(Template, 'HCP')
-    load('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/HCP_CIFTI_templates/Templates_consensus.mat'); % generated HCP templates
-elseif strcmp(Template, 'WU')
-    load('/data/cn/data1/scripts/CIFTI_RELATED/Template_Matching/Templates_consensus.mat'); % WashU-120 consensus templates and network info
-elseif strcmp(Template, 'ABCD')
-    cifti = ft_read_cifti_mod('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/ABCD_template/GroupAvg_rawassn_minsize400_regularized_filled_recolored_single_cleaned.dtseries.nii');
-    IDs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
-    IDs = single(IDs);
-    templates = cifti.data;
+if strcmp(FSUorHCPorWU, 'HCP')
+    load('/net/10.20.145.47/SMYSER04/smyser4/wunder/wunder_caf_III/TemplateMatching/HCP_CIFTI_templates/Templates_consensus.mat'); % generated HCP templates
+elseif strcmp(FSUorHCPorWU, 'FSU')
+    load('/gpfs/research/grattonlab/Scripts/CIFTI_RELATED/Template_Matching/Templates_consensus.mat'); 
+elseif strcmp(FSUorHCPorWU, 'WU')
+    load('/data/cn/data1/scripts/CIFTI_RELATED/Template_Matching/Templates_consensus.mat'); %WU-120 consensus templates and network info
 end
 
 templates = templates(1:59412,:)';
@@ -84,21 +84,17 @@ for s=1:length(subjects)
     catData = [];
     
     fprintf('   Concatenating BOLD (CIFTI) rest data...\n')
+    %save('debug_workspace1.mat');
+    
+  
         for r = 1:length(QC.runs) % loop through runs (may not be continuous)
             fprintf('Run #%d \n', r)
-            conf_fstring1 = sprintf('%s/%s/sub-%s/ses-None/files/',QC.topDir,QC.confoundsFolder,QC.subjectID);
-            all_fstring2 = sprintf('sub-%s_task-%s_run-%d',QC.subjectID,QC.condition,QC.runs(r));
-            
-            % for 14/15 data
-            %cifti_fstring = sprintf('%s/docker_output/sub-%s/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas_smooth2.55.dtseries.nii',cifti_dirs{s},QC.subjectID);
-            % for 9/10 data
-            if strcmp(QC.confoundsFolder, 'docker_output_BP_filter_and_cleaning_2020_05_17')
-                cifti_fstring = sprintf('%s/docker_output_BP_filter_and_cleaning_2020_05_17/sub-%s/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas.dtseries.nii',cifti_dirs{s},QC.subjectID);
-            else 
-                cifti_fstring = sprintf('%s/docker_output/sub-%s/ses-None/files/MNINonLinear/Results/task-rest_DCANBOLDProc_v4.0.0_Atlas.dtseries.nii',cifti_dirs{s},QC.subjectID);
-            end
-            
+            conf_fstring1 = sprintf('%s/%s/%s/',QC.topDir,QC.confoundsFolder,QC.subjectID);
+            all_fstring2 = sprintf('%s_b%d',QC.subjectID,QC.runs(r));
+            cifti_fstring = sprintf('%s/%s/%s/surface_work/%s_LR_surf_term_N50_eLABe_subcort_atlas_32k_fsLR_smooth2p25_cifti24dfp_resid_bpss.dtseries.nii',cifti_dirs{s},QC.confoundsFolder,QC.subjectID,QC.subjectID);
+            %save('debug_workspace.mat')
             fprintf('%s \n', cifti_fstring)
+            
             %   ***residuals -- not yet set up***
             %
             % if QC(i).residuals == 0 % the typical case
@@ -110,17 +106,13 @@ for s=1:length(subjects)
             %mins = 20;
             %all_fstring3 = sprintf('sub-%s_tmask_%dmins',QC.subjectID,mins);
             %tmask_fname = [conf_fstring1 'DCANBOLDProc_v4.0.0/analyses_v2/motion/' all_fstring3 '.txt']; %assume this is in confounds folder
-            
-            % for 14/15 data
-            %tmask_fname = [conf_fstring1 'DCANBOLDProc_v4.0.0/analyses_v2/motion/' all_fstring2 '-tmask_0.2' QC.FDtype '.txt']; %assume this is in confounds folder
-            %boldmot_folder{s,r} = [conf_fstring1 'DCANBOLDProc_v4.0.0']; % in this case, just give path/start so I can load different versions
-            % for 9/10 data 
-            tmask_fname = [conf_fstring1 'DCANBOLDProc_v4.0.0/analyses_v2/motion/sub-' QC.subjectID '_tmask.txt']; 
-            boldmot_folder{s,r} = [conf_fstring1 'DCANBOLDProc_v4.0.0']; 
-            
-            if ~exist(boldmot_folder{s,r})
-                error(['FD folder does not exist for: ' boldmot_folder{s,r}]);
-            end
+
+            tmask_fname = [conf_fstring1 all_fstring2 '_faln_dbnd_xr3d_BC_uwrp_atl_tmask.txt']; %assume this is in confounds folder
+            %boldmot_folder{s,r} = conf_fstring1; % in this case, just give path/start so I can load different versions
+
+            %if ~exist(boldmot_folder{s,r})
+            %    error(['FD folder does not exist for: ' boldmot_folder{s,r}]);
+            %end
             
             run_tmask = table2array(readtable(tmask_fname));
             run_data = ft_read_cifti_mod(cifti_fstring);
@@ -137,6 +129,7 @@ for s=1:length(subjects)
     fprintf('   Computing vertexwise correlation matrix on data of size %d by %d...\n',size(catData,1),size(catData,2))
     corr_mat_full = paircorr_mod(catData');
     corr_mat_full = single(corr_mat_full);
+    
     corr_vals = corr_mat_full(triu(true(59412),1));
     sorted_vals = sort(corr_vals, 'descend');
     subject_thresh = sorted_vals(round(0.05 * numel(sorted_vals)));
@@ -160,17 +153,16 @@ for s=1:length(subjects)
     dice_subject_index(x==0)=0;
     
     %%% write out results %%%
-    dice_match_fname = sprintf('%s/sub-%s_0.2FD_dice_to_templates.mat',outDir,QC.subjectID);
+    dice_match_fname = sprintf('%s/%s_dice_to_templates.mat',outDir,QC.subjectID);
     save(dice_match_fname, 'dice_to_templates','-v7.3');
-    dice_map_fname = sprintf('%s/sub-%s_0.2FD_dice_WTA_map_kden0.05.dtseries.nii',outDir,QC.subjectID);
+    dice_map_fname = sprintf('%s/%s_dice_WTA_map_kden0.05.dtseries.nii',outDir,QC.subjectID);
     template_cifti.data = dice_subject_index;
         template_cifti.time=1; template_cifti.hdr.dim(6)=1; template_cifti.hdr.dim(7)=59412; template_cifti.brainstructure=template_cifti.brainstructure(1:64984,:);
         template_cifti.brainstructurelabel={'CORTEX_LEFT','CORTEX_RIGHT'}; template_cifti.pos=template_cifti.pos(1:64984,:);
     ft_write_cifti_mod(dice_map_fname, template_cifti)
     %clear template_cifti
     
-    fprintf('Finished: sub-%s \n', subjects{s})
-    %save('debug_workspace4.mat');
+    fprintf('Finished: sub-%s \n', subjects{s});
 end
 
 clear template_cifti

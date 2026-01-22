@@ -55,11 +55,8 @@ elseif strcmp(FSUorHCPorWU, 'FSU')
 elseif strcmp(FSUorHCPorWU, 'WU')
     load('/data/cn/data1/scripts/CIFTI_RELATED/Template_Matching/Templates_consensus.mat'); %WU-120 consensus templates and network info
 end
-templates = templates(1:59412,:)';
-template_values_sorted = sort(templates(:), 'descend');
-threshval= template_values_sorted(round(numel(template_values_sorted) .* 0.05));
-threshtemplates= templates >= threshval;
-clear allTvals allTvals_sorted templates threshval
+
+
 
 for s=1:length(subjects)
     fprintf('Subject #%d \n', s)
@@ -152,16 +149,16 @@ for s=1:length(subjects)
     dice_subject_index(x==0)=0;
     
     %%% write out results %%%
-    dice_match_fname = sprintf('%s/sub-%s_0.2FD_dice_to_templates.mat',outDir,QC.subjectID);
+    dice_match_fname = sprintf('%s/sub-%s_0.2FD_dice_to_templates.mat',outDir,subjectID);
     save(dice_match_fname, 'dice_to_templates','-v7.3');
-    dice_map_fname = sprintf('%s/sub-%s_0.2FD_dice_WTA_map_kden0.05.dtseries.nii',outDir,QC.subjectID);
+    dice_map_fname = sprintf('%s/sub-%s_0.2FD_dice_WTA_map_kden0.05.dtseries.nii',outDir,subjectID);
     template_cifti.data = dice_subject_index;
         template_cifti.time=1; template_cifti.hdr.dim(6)=1; template_cifti.hdr.dim(7)=59412; template_cifti.brainstructure=template_cifti.brainstructure(1:64984,:);
         template_cifti.brainstructurelabel={'CORTEX_LEFT','CORTEX_RIGHT'}; template_cifti.pos=template_cifti.pos(1:64984,:);
     ft_write_cifti_mod(dice_map_fname, template_cifti)
     %clear template_cifti
     
-    fprintf('Finished: sub-%s \n', subjects{s})');
+    fprintf('Finished: sub-%s \n', subjects{s});
 end
 
 clear template_cifti

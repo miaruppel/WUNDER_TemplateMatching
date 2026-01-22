@@ -9,7 +9,7 @@ function cluster_filtering_cifti_cortex(networks_file, clustersize_mm, L_surface
 %
 % example:
 % cluster_filtering_cifti_cortex('/path/to/subject_dice_to_templates_map.dtseries.nii', 50, ...
-%   '/path/to/CConte69.L.midthickness.32k_fs_LR.surf.gii', '/path/to/Conte69.L.midthickness.32k_fs_LR.surf.gii', '/path/to/output_dir')
+%   '/path/to/Conte69.L.midthickness.32k_fs_LR.surf.gii', '/path/to/Conte69.L.midthickness.32k_fs_LR.surf.gii', '/path/to/output_dir')
 
 %check/format inputs
 if ~strcmp(networks_file(end-12:end), '.dtseries.nii')

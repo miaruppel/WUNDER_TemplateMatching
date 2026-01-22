@@ -95,13 +95,13 @@ binData = logical(corrData<cThresh);
 template.data = binData;
 
 % Extract just the filename (without extension)
-[~, fname, ~] = fileparts(spatialCorrMap); 
-% Get the first 7 characters = subject ID
-subject_id = fname(1:7);
+[~, fname, ~] = fileparts(spatialCorrMap);
+% Extract subject ID: starts with 'sub-' and ends with 'e'
+token = regexp(fname, '(sub-[^_]*e)', 'tokens');
+subject_id = token{1}{1};
 
 % Write out binary variants (no size threshold applied)
 ft_write_cifti_mod([outputdir '/' subject_id '_binarySpatialCorrMap_thresh' num2str(variantThresh) '%.dtseries.nii'],template)
-
 
 % Give each variant a unique ID.
 netVars = zeros(length(cortexInds),1);
@@ -173,7 +173,7 @@ end
 
 % Write out variants with uniqueIDs
 template.data=netVars;
-ft_write_cifti_mod([outputdir '/' subject_id '_networkVariants_thresh' num2str(variantThresh) '%_sizeThresh' num2str(sThresh) '_HCP.dtseries.nii'],template)
+ft_write_cifti_mod([outputdir '/' subject_id '_networkVariants_thresh' num2str(variantThresh) '%_sizeThresh' num2str(sThresh) '.dtseries.nii'],template)
 
 
 end
