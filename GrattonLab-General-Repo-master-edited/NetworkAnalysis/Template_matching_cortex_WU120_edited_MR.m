@@ -17,8 +17,7 @@ function Template_matching_cortex_WU120_edited_MR(data_info, outDir, Template)
 %
 %   outDir: output destination for dtseries.nii map and Dice values .mat
 %
-%   HCPorWU: one of either 'FSU' or 'NU'; sets up institution-specific paths/parameters
-%                   WU component added 2024-08-28 (MR)
+%   Template: one of either 'WU' or 'HCP'              
 %
 %   *** note: this script currently assumes runs labeled as 'rest' in the .xlsx
 %       datalist-- be sure to use a datalist only including rest runs ***
@@ -50,10 +49,7 @@ if strcmp(Template, 'HCP')
 elseif strcmp(Template, 'WU')
     load('/data/cn/data1/scripts/CIFTI_RELATED/Template_Matching/Templates_consensus.mat'); % WashU-120 consensus templates and network info
 elseif strcmp(Template, 'ABCD')
-    cifti = ft_read_cifti_mod('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/ABCD_template/GroupAvg_rawassn_minsize400_regularized_filled_recolored_single_cleaned.dtseries.nii');
-    IDs = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
-    IDs = single(IDs);
-    templates = cifti.data;
+    load('/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/ABCD_template/Hermosillo_ABCD_template_n141_zscored.mat'); % Robert's ABCD template (includes SCAN as 15th network)
 end
 
 templates = templates(1:59412,:)';
