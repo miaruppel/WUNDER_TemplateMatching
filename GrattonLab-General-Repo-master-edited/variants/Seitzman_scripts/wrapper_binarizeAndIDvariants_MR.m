@@ -1,17 +1,17 @@
 % Location of spatial correlation maps
 % term controls:
-%inputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/spatial_corr_maps/output_910_data/termcontrols';
+inputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/spatial_corr_maps/output_910_data/termcontrols/ABCD_template';
 % preemies:
-inputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/spatial_corr_maps/output_910_data/preemies';
+%inputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/spatial_corr_maps/output_910_data/preemies/ABCD_template';
 
 % (Optional) SNR mask 
 snrMask = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/bottomBrainMaskFixed.dtseries.nii';
 
 % Output directory
 % term controls:
-%outputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/binarizedIDs/output_910_data/termcontrols';
+outputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/binarizedIDs/output_910_data/termcontrols/ABCD_template';
 % preemies: 
-outputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/binarizedIDs/output_910_data/preemies';
+%outputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/binarizedIDs/output_910_data/preemies/ABCD_template';
 
 % Get list of spatial corr maps
 maps = dir(fullfile(inputdir, '*.dtseries.nii'));

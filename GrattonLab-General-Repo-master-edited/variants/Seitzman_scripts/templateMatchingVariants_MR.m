@@ -45,7 +45,10 @@ function templateMatchingVariants_MR(paramsFile,outputdir)
 
 % templateLoc = '/your/path/here/';
 templateLoc = pwd;
-load([templateLoc '/Resources/networkTemplateNames.mat']);
+%load([templateLoc '/Resources/networkTemplateNames.mat']); % WashU-120
+%load([templateLoc '/Resources/networkTemplateNames_HCP.mat']); % HCP
+load([templateLoc '/Resources/networkTemplateNames_ABCD.mat']); % ABCD
+
 count = 0;
 for i=1:length(IDNames)
     if strcmp(IDNames{i},'skip')
@@ -85,6 +88,7 @@ cd(origpath)
 [subjects, tmasks] = textread(tmaskfile,'%s %s');
 variants = textread(variantsfile,'%s');
 load(templatesfile)
+templates = templates(1:59412,:);
 ThreshTemplates = templates;
 clear templates
 
@@ -98,7 +102,8 @@ for s = 1:length(subjects)
     
     % Load timecourse data and variant information
     string = ['Subject ' subject ': calculating variant correlation maps'];
-    fprintf([repmat('\b',1,length(prevstring)) '%s'],string);
+    %fprintf([repmat('\b',1,length(prevstring)) '%s'],string);
+    fprintf('%s\n', string);
     prevstring = string;
     
     variant_file = variants{count};
@@ -109,11 +114,11 @@ for s = 1:length(subjects)
     
     netVars = ft_read_cifti_mod(variant_file);
     uniqueVars = unique(netVars.data); 
-    if uniqueVars(1)==0; uniqueVars(1)=[]; end;
-    
+    %if uniqueVars(1)==0; uniqueVars(1)=[]; end;
+    uniqueVars(uniqueVars == 0) = [];
 
     % Set up needed variables if it's the first iteration
-    if s==1;
+    if s==1
         out_template = netVars; out_template.data = [];
         ncortverts = sum(netVars.brainstructure==1 | netVars.brainstructure==2);
         networkIDs = zeros(ncortverts,length(subjects));
@@ -122,26 +127,33 @@ for s = 1:length(subjects)
     end
     
     subdata = subdata(1:ncortverts,logical(tmask));
-
     
     % Loop through each variant and calculate its connectivity map
+    correlmaps_var = [];
+
     for jj=1:length(uniqueVars)
         varverts = logical(netVars.data==uniqueVars(jj));
+        %nverts = sum(varverts);
+        %disp(['Variant ' num2str(jj) ' has ' num2str(nverts) ' vertices']);
+        
         correlmaps = paircorr_mod(mean(subdata(varverts,:))',subdata'); 
         correlmaps(isnan(correlmaps)) = 0;
         correlmaps_var(:,jj) = correlmaps';
         clear correlmaps
     end
-    disp('Done')
+    %disp('Done')
     clear subdata
     
     
     % Match each variant's connectivity map to each template connectivity map
-    disp('Matching to templates and computing goodness of fit')
+    text_match = 'Matching to templates and computing goodness of fit';
+    fprintf('%s ', text_match)
+    %disp('Matching to templates and computing goodness of fit')
     corr_coeff = zeros(length(uniqueVars),size(ThreshTemplates,2));
     for var=1:length(uniqueVars)
-        disp(['Subject ' subject ', variant #' num2str(var) ' out of ' num2str(length(uniqueVars))]);
-        for templatenum = 1:size(ThreshTemplates,2);
+        fprintf('Subject %s, variant #%d out of %d\n', subject, var, length(uniqueVars));
+        %disp(['Subject ' subject ', variant #' num2str(var) ' out of ' num2str(length(uniqueVars))]);
+        for templatenum = 1:size(ThreshTemplates,2)
             corr_coeff(var,templatenum) = paircorr_mod(correlmaps_var(:,var),ThreshTemplates(:,templatenum));
         end
     end

@@ -3,12 +3,12 @@
 % Path to text file with subject dconn locations
 % 9/10 data
 % terms controls:
-%listFile = '/data/shimony/shimony2/wunder/wunder_caf_II/ABCD_DCAN_docker/docker_output_BP_filter_and_cleaning_2020_05_17/dconns/N52_termcontrols_subjdconns.lst';
+listFile = '/data/shimony/shimony2/wunder/wunder_caf_II/ABCD_DCAN_docker/docker_output_BP_filter_and_cleaning_2020_05_17/dconns/N52_termcontrols_subjdconns.lst';
 % preemies:
-listFile = '/data/shimony/shimony2/wunder/wunder_caf_II/ABCD_DCAN_docker/docker_output_BP_filter_and_cleaning_2020_05_17/dconns/N56_preemies_subjdconns.lst';
+%listFile = '/data/shimony/shimony2/wunder/wunder_caf_II/ABCD_DCAN_docker/docker_output_BP_filter_and_cleaning_2020_05_17/dconns/N56_preemies_subjdconns.lst';
 
 % Output directory (passed into your function)
-outputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/spatial_corr_maps/output_910_data';
+outputdir = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/spatial_corr_maps/output_910_data/termcontrols/ABCD_template';
 
 % Read the file
 fid = fopen(listFile, 'r');

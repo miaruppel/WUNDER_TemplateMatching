@@ -47,8 +47,12 @@ end
 
 
 % Read in group-average matrix
+% HCP dconn
 %groupDconnLoc = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/net_variant_analysis/HCP_all384_avgCorrMat.dconn.nii';
-groupDconnLoc = '/data/wheelock/data1/datasets/WashU120/120_allsubs_corr.dconn.nii';
+% WashU120 dconn
+%groupDconnLoc = '/data/wheelock/data1/datasets/WashU120/120_allsubs_corr.dconn.nii';
+% ABCD dconn
+groupDconnLoc = '/data/smyser/smyser4/wunder/wunder_caf_III/TemplateMatching/ABCD_template/ABCD_GROUP_AVERAGES/group1_dconn/avg_ses-baselineYear1Arm1_task-rest_bold_timeseries.dtseries.nii_10_minutes_of_data_at_FD_0.2.dconn.nii';
 tempCifti = ft_read_cifti_mod(groupDconnLoc);
 cortexInds = 1:sum(tempCifti.brainstructure==1 | tempCifti.brainstructure==2);
 groupMat = single(FisherTransform(tempCifti.data(cortexInds,cortexInds)));
@@ -84,7 +88,7 @@ parts = strsplit(subDconnLoc, filesep);
 sub_idx = find(startsWith(parts, 'sub-'), 1);
 subject_id = parts{sub_idx};
 
-ft_write_cifti_mod([outputdir '/preemies/' subject_id '_spatialCorrMap.dtseries.nii'],template)
+ft_write_cifti_mod([outputdir '/' subject_id '_spatialCorrMap.dtseries.nii'],template)
 
 end
 
